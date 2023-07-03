@@ -1,0 +1,21 @@
+// https://www.typescriptlang.org/tsconfig/
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "CommonJS",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"downlevelIteration": true,
+		"allowSyntheticDefaultImports": true,
+		"importHelpers": true,
+		"skipLibCheck": true,
+		"sourceMap": false,
+		"removeComments": false,
+		"noEmitOnError": false,
+		"strict": true,
+		"alwaysStrict": false,
+		"noImplicitAny": true,
+		"typeRoots": ["node_modules/@types/"]
+	},
+	"include": ["src/**/*", "npm.ts"]
+}
