@@ -9,6 +9,7 @@ superclean:
 	npx shx rm -f ./package-lock.json
 	npx shx rm -f ./package.json
 	npx shx rm -rf node_modules
+	find ./packages -name "node_modules" -type d -prune -exec rm -rf '{}' +
 
 tests:
 	make test/unit 
