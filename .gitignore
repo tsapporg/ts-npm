@@ -1,1 +1,47 @@
-node_modules
+# This file is responsible for telling our source storage and version control system to ignore these files.
+
+# Ignore OS files. 
+.DS_Store
+
+# Ignore some editor files.
+.vscode
+
+**/*.d.ts*
+src/**/*.js
+
+# Ignore CDK files.
+cdk.context.json
+**cdk.staging
+**cdk.out
+
+# Ignore log files.
+*.log
+
+# TODO should we ignore this file?
+#config/.env
+
+# Ignore builds.
+dist*/
+src/standalone.desktop/target/
+src/infra.aws/cdk.staging
+
+# ...Unreal Engine builds.
+**/Intermediate
+**/Saved
+**/Build
+**/Binaries
+**/DerivedDataCache
+
+# Ignore dependency files.
+node_modules/
+package-lock.json
+package.json
+
+# Ignore generated files.
+v8-compile-cache-0
+
+# Ignore installers.
+**/*.run 
+**/*.tar.gz
+**/*.rpm
+packages/dam.asset.workflow.cinema4d-animation-to-pngs/installers/*.sh
