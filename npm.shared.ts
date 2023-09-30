@@ -8,7 +8,7 @@ const npmPackage: any = {
   dependencies: {},
   devDependencies: {
     'typescript': '4.8.4',
-    '@types/node': '18.11.18',
+    '@types/node': '18.16.0',
     'ts-node': '10.9.1',
     'tslib': '2.4.0',
 
