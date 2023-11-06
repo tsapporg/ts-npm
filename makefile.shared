@@ -1,0 +1,19 @@
+# This file is responsible for defining shared developer commands across all packages,
+#  including the package this is copied from, _ts-app-devkit.
+# It gets copied into all TSAPP packages during setup.
+# You can run `make packages/copy-shared-files` after updating this file in the _ts-app-devkit package 
+#  to update downstream shared dependencies for TSAPP packages.
+
+superclean:
+	npx shx rm -f ./package-lock.json
+	npx shx rm -f ./package.json
+	npx shx rm -rf node_modules
+	find ./packages -name "node_modules" -type d -prune -exec rm -rf '{}' +
+
+tests:
+	for test in ./test/test.*.ts; do \
+		echo "$$test"; \
+		node \
+			--experimental-specifier-resolution=node --experimental-modules --no-warnings \
+			--loader ts-node/esm $$test; \
+	done
