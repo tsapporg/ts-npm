@@ -27,9 +27,17 @@ Let's say you have an NPM-based TypeScript application with many different `src/
         └── infra
             └── hosting_provider_infra_as_code.ts
 
-With the current paradigm for this type of application monorepo, you either put all the dependencies in a single package.json and find a way to bundle them out when building your artifacts, or create a `packages/` folder in your root package, breaking up all the artifact types into separate packages. Both approaches are tedious. There is monorepo software out there like Lerna, but we had issues using it in a low-RAM environment for other projects, and frankly it might be overkill for application monorepos; it seemed more sensible to juse makefiles for scripts and package.json files _just_ for dependencies and "package" info. 
+With the current paradigm for this type of application monorepo, you either put all the dependencies in a single package.json and find a way to bundle them out when building your artifacts, or create a `packages/` folder in your root package, breaking up all the artifact types into separate packages. Both approaches are tedious. There is monorepo software out there like Lerna, but we had issues using it in a low-RAM environment for other projects, and frankly it might be overkill for application monorepos; it seemed more sensible to just use makefiles for scripts and package.json files _just_ for dependencies and "package" info. 
 
-ts-npm takes a more ad-hoc approach to monorepo management. For the above example, we'd define common depenencies in an npm.ts file, then break out out each requirement for a separate set of dependencies into its own npm*.ts file, e.g. npm.website.ts, npm.native-desktop.ts, etc. 
+ts-npm takes a more ad-hoc approach to monorepo management. For the above example, we'd define common depenencies in an npm.ts file, then break out out each requirement for a separate set of dependencies into its own npm*.ts file, e.g. npm.website.ts, npm.native-desktop.ts, etc. Defining dependencies might look something like this:
+
+        .npm/
+        ├── npm.ts # Must be here.
+        ├── npm.website.ts
+        ├── npm.cli.ts
+        ├── npm.native-desktop.ts
+        ├── npm.native-mobile.ts
+        └── npm.infra.ts
 
 > You should structure your npm*.ts files based on how you plan on bundling them, e.g. if you want to build a Docker image for a piece of business logic that runs on your hosting provider, you might create an npm.infra.business-logic.ts file, then add a build step before deploying to your hosting provider to build a package.json file from npm.infra.business-logic.ts, and placing in some sort of "dist" dir to use for deployment.
 
@@ -40,7 +48,7 @@ Install this package globally. From a terminal, run:
 
     npm install -g tsapporg/ts-npm
 
-Instead of running `npm install` in your NPM package source, run `ts-npm install`. This command generates `package.json`.
+Instead of running `npm install` in your NPM package root (and assuming the declaration of dependencies in a `.npm` folder above), run `ts-npm --action=install --absolute-path-to-dependencies=$(pwd)/.npm`. This command generates `package.json`.
 
 ## Develop & Test
 Make changes, commit changes, push changes, reinstall locally:
