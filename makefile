@@ -1,11 +1,9 @@
 install:
-# ts-npm may not work, so just use existing package.json.
 	if [ -d ../ts-npm ]; then \
-		#npm install -g ../ts-npm; \
 		npm install; \
 	else \
 		npm install -g tsapporg/ts-npm; \
-		ts-npm install; \
+		ts-npm --action=install --absolute-path-to-dependencies=$(pwd); \
 	fi;
 
 package:
