@@ -53,6 +53,15 @@ Instead of running `npm install` in your NPM package root (and assuming the decl
 ## Develop & Test
 Make changes, commit changes, push changes, reinstall locally:
   
+    make install
+    make package
+    make tests
+
     git add -A; git commit -m 'Test commit'; git push -u origin main; npm uninstall -g tsapporg/ts-npm; npm cache clear --force; npm install -g tsapporg/ts-npm
+
+    cd ./test-project
+    ts-npm --action=install --absolute-path-to-dependencies=$(pwd)/.npm
+
+    make superclean
 
 In your NPM package source, run `ts-npm install`. 

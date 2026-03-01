@@ -1,5 +1,5 @@
 {
-  "@comment": "This file was generated from /Users/franklovecchio/Dropbox/_software/github/tsapporg/ts-npm/npm*.ts .",
+  "@comment": "This file was generated from /home/mainframenzo/Desktop/dev/ts-npm/npm*.ts .",
   "dependencies": {
     "ts-command-line-args": "2.5.1",
     "glob": "10.3.10",
